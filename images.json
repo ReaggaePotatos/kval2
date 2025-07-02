@@ -1,0 +1,10 @@
+[
+    {"id": 1, "title": "League of legends", "category": "Игры", "rating": 4.5, "url": "./assets/img/league.webp"},
+    {"id": 2, "title": "Xbox", "category": "Техника", "rating": 4.2, "url": "./assets/img/xbox.webp"},
+    {"id": 3, "title": "Sekiro", "category": "Игры", "rating": 4.8, "url": "./assets/img/sekiro.webp"},
+    {"id": 4, "title": "Playstation 5", "category": "Техника", "rating": 4.0, "url": "./assets/img/ps5.webp"},
+    {"id": 5, "title": "Doom", "category": "Игры", "rating": 4.7, "url": "./assets/img/doom.webp"},
+    {"id": 6, "title": "Iphone 14 Pro Max", "category": "Техника", "rating": 3.9, "url": "./assets/img/iphone 14.webp"},
+    {"id": 7, "title": "Cuphead", "category": "Игры", "rating": 4.9, "url": "./assets/img/cuphead.webp"},
+    {"id": 8, "title": "Nintendo Switch 2", "category": "Техника", "rating": 3.5, "url": "./assets/img/Nintendo.webp"}
+]
