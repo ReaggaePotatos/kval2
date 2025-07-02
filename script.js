@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Элементы DOM
+
     const gallery = document.getElementById('gallery');
     const categorySelect = document.getElementById('category');
     const searchInput = document.getElementById('search');
@@ -10,20 +10,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const avgRatingSpan = document.getElementById('avg-rating');
     const modal = document.getElementById('modal');
     const closeModal = document.querySelector('.close');
-    
-    // Переменные состояния
+
     let images = [];
     let filteredImages = [];
     let sortAscending = false;
-    
-    // Загрузка данных
+
     loadImages();
-    
-    // Обработчики событий
+
     applyFiltersBtn.addEventListener('click', applyFilters);
     sortRatingBtn.addEventListener('click', toggleSort);
     searchInput.addEventListener('input', function() {
-        // Мгновенный поиск при вводе (опционально)
+
         applyFilters();
     });
     closeModal.addEventListener('click', function() {
@@ -34,8 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.style.display = 'none';
         }
     });
-    
-    // Функция загрузки изображений
+
     function loadImages() {
         fetch('images.json')
             .then(response => {
@@ -47,11 +43,9 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 images = data;
                 filteredImages = [...images];
-                
-                // Заполняем категории
+
                 populateCategories();
-                
-                // Отображаем изображения
+
                 renderGallery();
                 updateStats();
             })
@@ -60,8 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 showError('Не удалось загрузить изображения. Пожалуйста, попробуйте позже.');
             });
     }
-    
-    // Заполнение списка категорий
+
     function populateCategories() {
         const categories = new Set(images.map(img => img.category));
         categories.forEach(category => {
@@ -71,8 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
             categorySelect.appendChild(option);
         });
     }
-    
-    // Применение фильтров
+
     function applyFilters() {
         const categoryFilter = categorySelect.value;
         const searchTerm = searchInput.value.toLowerCase();
@@ -84,8 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             return matchesCategory && matchesSearch;
         });
-        
-        // Применяем текущую сортировку
+
         if (sortAscending !== null) {
             sortImages();
         }
@@ -93,23 +84,20 @@ document.addEventListener('DOMContentLoaded', function() {
         renderGallery();
         updateStats();
     }
-    
-    // Переключение сортировки
+
     function toggleSort() {
         sortAscending = !sortAscending;
         sortDirection.textContent = sortAscending ? '↑' : '↓';
         sortImages();
         renderGallery();
     }
-    
-    // Сортировка изображений
+
     function sortImages() {
         filteredImages.sort((a, b) => {
             return sortAscending ? a.rating - b.rating : b.rating - a.rating;
         });
     }
-    
-    // Отрисовка галереи
+
     function renderGallery() {
         gallery.innerHTML = '';
         
@@ -136,8 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
             gallery.appendChild(card);
         });
     }
-    
-    // Показать детали изображения в модальном окне
+
     function showImageDetails(image) {
         document.getElementById('modal-title').textContent = image.title;
         document.getElementById('modal-image').src = image.url;
@@ -146,8 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('modal-category').textContent = image.category;        
         modal.style.display = 'block';
     }
-    
-    // Обновление статистики
+
     function updateStats() {
         totalCountSpan.textContent = filteredImages.length;
         
@@ -158,13 +144,11 @@ document.addEventListener('DOMContentLoaded', function() {
             avgRatingSpan.textContent = '0';
         }
     }
-    
-    // Форматирование рейтинга
+
     function formatRating(rating) {
         return '★'.repeat(Math.floor(rating)) + (rating % 1 >= 0.5 ? '½' : '') + ` ${rating}`;
     }
-    
-    // Показать сообщение об ошибке
+
     function showError(message) {
         gallery.innerHTML = `<p class="error-message">${message}</p>`;
     }
